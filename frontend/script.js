@@ -405,271 +405,306 @@ document.addEventListener(
 );
 
 
-/* Customer Reviews System */
 
-document.addEventListener("DOMContentLoaded", function () {
+/* Customer Reviews System - Supabase */
+
+const SUPABASE_URL = "https://fttcocmwmsikjjdxdkyo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_gBBsbfqudQn6K1EbTAxOSg_SqZzEpwn";
+
+const REVIEWS_TABLE_URL = `${SUPABASE_URL}/rest/v1/reviews`;
+const STORAGE_BUCKET = "order-review-photos";
+
+document.addEventListener("DOMContentLoaded", () => {
     const reviewForm = document.getElementById("reviewForm");
-
-    // Run only on pages containing the review form
-    if (!reviewForm) return;
-
-    const starButtons = document.querySelectorAll(
-        "#starRating button"
-    );
+    const starButtons = document.querySelectorAll("#starRating button");
     const reviewMessage = document.getElementById("reviewMessage");
-    const approvedReviews = document.getElementById("approvedReviews");
+    const reviewsContainer = document.getElementById("approvedReviews");
+    const photoInput = document.getElementById("orderPhoto");
+
+    if (!reviewForm || !reviewsContainer) return;
 
     let selectedRating = 0;
 
-    
-let savedReviews = JSON.parse(
-    localStorage.getItem("rangE hunarReviews") || "[]"
-);
+    // Supabase request headers
+    function supabaseHeaders(extraHeaders = {}) {
+        return {
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            ...extraHeaders
+        };
+    }
 
-function saveReviews() {
-    localStorage.setItem(
-        "rangE hunarReviews",
-        JSON.stringify(savedReviews)
-    );
-}
-
-
-function displaySavedReviews() {
-    approvedReviews.innerHTML = "";
-
-    savedReviews.forEach(function (review) {
-        const card = document.createElement("div");
-        card.style.cssText =
-            "background:#fff;padding:18px;margin:15px 0;" +
-            "border:1px solid #f3d5e3;border-radius:12px;text-align:left;";
-
-        const name = document.createElement("h3");
-        name.textContent = review.name;
-        name.style.color = "#a83265";
-
-        const stars = document.createElement("p");
-        stars.textContent =
-            "⭐".repeat(review.rating) +
-            " (" + review.rating + "/5)";
-        stars.style.color = "#f4b400";
-
-        const text = document.createElement("p");
-        text.textContent = review.text;
-
-        const message =
-            "Review for RANG E HUNAR BY MISHAF 💖\n\n" +
-            "Customer: " + review.name + "\n" +
-            "Rating: " + "⭐".repeat(review.rating) +
-            " (" + review.rating + "/5)\n" +
-            "Review: " + review.text;
-
-        const whatsappButton = document.createElement("button");
-        whatsappButton.type = "button";
-        whatsappButton.textContent = "Send Review on WhatsApp";
-        whatsappButton.className = "review-submit";
-
-        whatsappButton.addEventListener("click", function () {
-            const url =
-                "https://wa.me/923278797947?text=" +
-                encodeURIComponent(message);
-
-            window.open(url, "_blank", "noopener,noreferrer");
-        });
-
-        const instagramButton = document.createElement("button");
-        instagramButton.type = "button";
-        instagramButton.textContent = "Send Review on Instagram 💗";
-        instagramButton.className = "review-submit";
-        instagramButton.style.background = "#C13584";
-        instagramButton.style.marginTop = "10px";
-
-        instagramButton.addEventListener("click", async function () {
-            try {
-                await navigator.clipboard.writeText(message);
-                alert("Review copied! Paste it into Instagram DM.");
-            } catch (error) {
-                alert("Please copy your review text and share it on Instagram.");
-            }
-
-            window.open(
-                "https://www.instagram.com/rang_e_hunar.by_mishaf/",
-                "_blank",
-                "noopener,noreferrer"
+    // Customer rating select karna
+    function updateStars() {
+        starButtons.forEach((button) => {
+            const rating = Number(button.dataset.rating);
+            button.style.color =
+                rating <= selectedRating ? "#f4b400" : "#bdbdbd";
+            button.setAttribute(
+                "aria-pressed",
+                String(rating === selectedRating)
             );
         });
+    }
 
-        card.append(
-            name,
-            stars,
-            text,
-            whatsappButton,
-            instagramButton
-        );
-
-        approvedReviews.appendChild(card);
-    });
-}
-
-
-displaySavedReviews();
-
-
-    // Star rating selection
-    starButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
+    starButtons.forEach((button) => {
+        button.addEventListener("click", () => {
             selectedRating = Number(button.dataset.rating);
-
-            starButtons.forEach(function (star) {
-                const isSelected =
-                    Number(star.dataset.rating) <= selectedRating;
-
-                star.classList.toggle("active", isSelected);
-                star.setAttribute(
-                    "aria-pressed",
-                    String(Number(star.dataset.rating) === selectedRating)
-                );
-            });
-
-            reviewMessage.textContent =
-                "You selected " + selectedRating + " out of 5 stars.";
+            updateStars();
         });
     });
 
-    // Review form submission
-    reviewForm.addEventListener("submit", function (event) {
+    // Website par reviews show karna
+    function displayReviews(reviews) {
+        reviewsContainer.replaceChildren();
+
+        if (!reviews.length) {
+            const message = document.createElement("p");
+            message.textContent = "Be the first to share your experience! 💖";
+            reviewsContainer.appendChild(message);
+            return;
+        }
+
+        reviews.forEach((review) => {
+            const card = document.createElement("article");
+            card.className = "review-card";
+
+            const name = document.createElement("h3");
+            name.textContent = review.customer_name;
+            card.appendChild(name);
+
+            const stars = document.createElement("p");
+            stars.textContent = "★".repeat(review.rating) +
+                "☆".repeat(5 - review.rating);
+            stars.style.color = "#f4b400";
+            stars.setAttribute("aria-label", `${review.rating} out of 5 stars`);
+            card.appendChild(stars);
+
+            const text = document.createElement("p");
+            text.textContent = review.review_text;
+            card.appendChild(text);
+
+            if (review.image_url) {
+                const image = document.createElement("img");
+                image.src = review.image_url;
+                image.alt = `Order shared by ${review.customer_name}`;
+                image.loading = "lazy";
+                image.style.maxWidth = "100%";
+                image.style.height = "auto";
+                image.style.borderRadius = "10px";
+                card.appendChild(image);
+            }
+
+            if (review.created_at) {
+                const date = document.createElement("small");
+                date.textContent = new Date(review.created_at)
+                    .toLocaleDateString();
+                card.appendChild(date);
+            }
+
+            // WhatsApp sharing
+            const whatsappButton = document.createElement("button");
+            whatsappButton.type = "button";
+            whatsappButton.textContent = "Share on WhatsApp";
+            whatsappButton.addEventListener("click", () => {
+                const message =
+                    `Customer Review - RANG E HUNAR BY MISHAF\n\n` +
+                    `${review.customer_name}\n` +
+                    `${"★".repeat(review.rating)}\n` +
+                    `${review.review_text}\n\n` +
+                    window.location.href;
+
+                window.open(
+                    "https://wa.me/?text=" + encodeURIComponent(message),
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+            });
+            card.appendChild(whatsappButton);
+
+            // Instagram sharing: copy review text
+            const instagramButton = document.createElement("button");
+            instagramButton.type = "button";
+            instagramButton.textContent = "Copy for Instagram";
+            instagramButton.addEventListener("click", async () => {
+                const message =
+                    `${review.customer_name} ⭐ ${review.rating}/5\n` +
+                    `${review.review_text}\n\n` +
+                    "RANG E HUNAR BY MISHAF 💖";
+
+                try {
+                    await navigator.clipboard.writeText(message);
+                    alert(
+                        "Review text copied! Ab Instagram open karke paste kar do. 💖"
+                    );
+                } catch {
+                    alert("Review text copy nahi hua. Please text manually copy karo.");
+                }
+            });
+            card.appendChild(instagramButton);
+
+            reviewsContainer.appendChild(card);
+        });
+    }
+
+    // Supabase se latest reviews load karna
+    async function loadReviews() {
+        try {
+            const response = await fetch(
+                `${REVIEWS_TABLE_URL}?select=id,customer_name,rating,review_text,image_url,created_at&order=created_at.desc`,
+                {
+                    headers: supabaseHeaders()
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(await response.text());
+            }
+
+            const reviews = await response.json();
+            displayReviews(reviews);
+        } catch (error) {
+            console.error("Reviews load error:", error);
+            reviewsContainer.textContent =
+                "Reviews abhi load nahi ho rahe. Please thori dair baad try karein.";
+        }
+    }
+
+    // Photo ko Supabase Storage par upload karna
+    async function uploadOrderPhoto(file) {
+        if (!file) return null;
+
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+            throw new Error("Please JPG, PNG ya WebP photo upload karein.");
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+            throw new Error("Photo ka size 2 MB se kam hona chahiye.");
+        }
+
+        const extensionByType = {
+            "image/jpeg": "jpg",
+            "image/png": "png",
+            "image/webp": "webp"
+        };
+
+        const randomId = window.crypto?.randomUUID
+            ? window.crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+        const filePath =
+            `${Date.now()}-${randomId}.${extensionByType[file.type]}`;
+
+        const uploadUrl =
+            `${SUPABASE_URL}/storage/v1/object/` +
+            `${STORAGE_BUCKET}/${encodeURIComponent(filePath)}`;
+
+        const response = await fetch(uploadUrl, {
+            method: "POST",
+            headers: supabaseHeaders({
+                "Content-Type": file.type,
+                "x-upsert": "false"
+            }),
+            body: file
+        });
+
+        if (!response.ok) {
+            throw new Error(
+                "Photo upload nahi hui. Supabase Storage bucket aur policies check karein."
+            );
+        }
+
+        return (
+            `${SUPABASE_URL}/storage/v1/object/public/` +
+            `${STORAGE_BUCKET}/${encodeURIComponent(filePath)}`
+        );
+    }
+
+    // Review submit karna
+    reviewForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const customerName =
             document.getElementById("customerName").value.trim();
 
-        const customerReview =
+        const reviewText =
             document.getElementById("customerReview").value.trim();
 
-        if (!customerName || !customerReview) {
+        const submitButton =
+            reviewForm.querySelector('button[type="submit"]');
+
+        if (!customerName || !reviewText || selectedRating === 0) {
             reviewMessage.textContent =
-                "Please enter your name and review.";
+                "Please name, review aur star rating complete karein.";
             return;
         }
 
-        if (selectedRating === 0) {
+        if (customerName.length > 100 || reviewText.length > 2000) {
             reviewMessage.textContent =
-                "Please select a star rating first.";
+                "Name 100 aur review 2000 characters se zyada nahi hona chahiye.";
             return;
         }
 
-        // Prepare a WhatsApp message
-        const message =
-            "Customer Review - RANG E HUNAR BY MISHAF\n\n" +
-            "Name: " + customerName + "\n" +
-            "Rating: " + "★".repeat(selectedRating) + "\n" +
-            "Review: " + customerReview;
+        if (
+            SUPABASE_PUBLISHABLE_KEY ===
+            "PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE"
+        ) {
+            reviewMessage.textContent =
+                "Pehle apni Supabase Publishable Key code mein add karein.";
+            return;
+        }
 
-const yourWhatsAppNumber = "923278797947";
+        const photo = photoInput?.files?.[0];
 
-const whatsappURL =
-    "https://wa.me/" + yourWhatsAppNumber +
-    "?text=" + encodeURIComponent(message);
+        submitButton.disabled = true;
+        reviewMessage.textContent = "Your review is being submitted... 💌";
 
+        try {
+            // Pehle photo upload hogi, agar customer ne photo select ki hai
+            const imageUrl = await uploadOrderPhoto(photo);
 
-        // Create a preview safely using textContent
-        const reviewCard = document.createElement("div");
-        reviewCard.style.cssText =
-            "background:#fff;padding:18px;margin:15px 0;" +
-            "border:1px solid #f3d5e3;border-radius:12px;text-align:left;";
+            const response = await fetch(REVIEWS_TABLE_URL, {
+                method: "POST",
+                headers: supabaseHeaders({
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                }),
+                body: JSON.stringify({
+                    customer_name: customerName,
+                    rating: selectedRating,
+                    review_text: reviewText,
+                    image_url: imageUrl
+                })
+            });
 
-        const nameHeading = document.createElement("h3");
-        nameHeading.textContent = customerName;
-        nameHeading.style.color = "#a83265";
+            if (!response.ok) {
+                throw new Error(
+                    "Review save nahi hua. Supabase table aur permissions check karein."
+                );
+            }
 
-        const ratingText = document.createElement("p");
-        ratingText.textContent =
-            "★".repeat(selectedRating) +
-            "☆".repeat(5 - selectedRating);
-        ratingText.style.color = "#f4b400";
+            reviewForm.reset();
+            selectedRating = 0;
+            updateStars();
 
-        const reviewText = document.createElement("p");
-        reviewText.textContent = customerReview;
+            reviewMessage.textContent =
+                "Thank you! Your review has been published. 💖";
 
-        const pendingText = document.createElement("p");
-        pendingText.textContent =
-            "Your review preview (not published).";
-        pendingText.style.color = "#777";
-
-        const shareButton = document.createElement("button");
-        shareButton.type = "button";
-        shareButton.textContent = "Send Review on WhatsApp";
-        shareButton.className = "review-submit";
-        shareButton.addEventListener("click", function () {
-            window.open(whatsappURL, "_blank", "noopener,noreferrer");
-        });
-
-        reviewCard.append(
-            nameHeading,
-            ratingText,
-            reviewText,
-            pendingText,
-            shareButton
-        );
-
-        
-
-const instagramButton = document.createElement("button");
-instagramButton.type = "button";
-instagramButton.textContent = "Send Review on Instagram 💗";
-instagramButton.className = "review-submit";
-instagramButton.style.marginTop = "10px";
-instagramButton.style.background = "#C13584";
-
-instagramButton.addEventListener("click", async function () {
-
-const ratingToSend = selectedRating;
-
-const instagramMessage =
-    "Review for RANG E HUNAR BY MISHAF 💖\n\n" +
-    "Customer: " + customerName + "\n" +
-    "Rating: " + "⭐".repeat(ratingToSend) +
-    " (" + ratingToSend + "/5)\n" +
-    "Review: " + customerReview;
-
-
-    try {
-        await navigator.clipboard.writeText(instagramMessage);
-        alert(
-            "Your review has been copied! Paste it into Instagram DM."
-        );
-    } catch (error) {
-        alert("Please copy your review text and paste it into Instagram.");
-    }
-
-    window.open(
-        "https://www.instagram.com/rang_e_hunar.by_mishaf/",
-        "_blank",
-        "noopener,noreferrer"
-    );
-});
-
-reviewCard.appendChild(instagramButton);
-
-
-
-    savedReviews.unshift({
-    name: customerName,
-    rating: selectedRating,
-    text: customerReview
-});
-
-saveReviews();
-displaySavedReviews();
-
-        reviewMessage.textContent =
-            "Review preview ready! Send it on WhatsApp if you wish.";
-
-        reviewForm.reset();
-        selectedRating = 0;
-
-        starButtons.forEach(function (star) {
-            star.classList.remove("active");
-            star.setAttribute("aria-pressed", "false");
-        });
+            await loadReviews();
+        } catch (error) {
+            console.error("Review submit error:", error);
+            reviewMessage.textContent =
+                error.message || "Review submit nahi hua. Please try again.";
+        } finally {
+            submitButton.disabled = false;
+        }
     });
+
+    // Page open hone par reviews load honge
+    loadReviews();
 });
