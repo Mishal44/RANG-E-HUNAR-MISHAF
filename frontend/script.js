@@ -454,97 +454,119 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Website par reviews show karna
-    function displayReviews(reviews) {
-        reviewsContainer.replaceChildren();
 
-        if (!reviews.length) {
-            const message = document.createElement("p");
-            message.textContent = "Be the first to share your experience! 💖";
-            reviewsContainer.appendChild(message);
-            return;
+function displayReviews(reviews) {
+    reviewsContainer.replaceChildren();
+
+    if (!reviews.length) {
+        const message = document.createElement("p");
+        message.textContent = "Be the first to share your experience! 💖";
+        reviewsContainer.appendChild(message);
+        return;
+    }
+
+    reviews.forEach((review) => {
+        const card = document.createElement("article");
+        card.className = "review-card";
+
+        // Name and rating on the same line
+        const topRow = document.createElement("div");
+        topRow.className = "review-top-row";
+
+        const name = document.createElement("h3");
+        name.textContent = review.customer_name;
+
+        const stars = document.createElement("span");
+        stars.className = "review-stars";
+        stars.textContent =
+            "★".repeat(review.rating) +
+            "☆".repeat(5 - review.rating);
+        stars.setAttribute(
+            "aria-label",
+            `${review.rating} out of 5 stars`
+        );
+
+        topRow.append(name, stars);
+        card.appendChild(topRow);
+
+        // Comment and small photo side by side
+        const contentRow = document.createElement("div");
+        contentRow.className = "review-content-row";
+
+        const text = document.createElement("p");
+        text.className = "review-text";
+        text.textContent = review.review_text;
+        contentRow.appendChild(text);
+
+        if (review.image_url) {
+            const image = document.createElement("img");
+            image.src = review.image_url;
+            image.alt = `Order shared by ${review.customer_name}`;
+            image.loading = "lazy";
+            contentRow.appendChild(image);
         }
 
-        reviews.forEach((review) => {
-            const card = document.createElement("article");
-            card.className = "review-card";
+        card.appendChild(contentRow);
 
-            const name = document.createElement("h3");
-            name.textContent = review.customer_name;
-            card.appendChild(name);
+        // Date
+        if (review.created_at) {
+            const date = document.createElement("small");
+            date.className = "review-date";
+            date.textContent = new Date(
+                review.created_at
+            ).toLocaleDateString();
+            card.appendChild(date);
+        }
 
-            const stars = document.createElement("p");
-            stars.textContent = "★".repeat(review.rating) +
-                "☆".repeat(5 - review.rating);
-            stars.style.color = "#f4b400";
-            stars.setAttribute("aria-label", `${review.rating} out of 5 stars`);
-            card.appendChild(stars);
+        // Sharing buttons
+        const actions = document.createElement("div");
+        actions.className = "review-actions";
 
-            const text = document.createElement("p");
-            text.textContent = review.review_text;
-            card.appendChild(text);
+        const whatsappButton = document.createElement("button");
+        whatsappButton.type = "button";
+        whatsappButton.className = "review-share-btn";
+        whatsappButton.textContent = "Share on WhatsApp";
 
-            if (review.image_url) {
-                const image = document.createElement("img");
-                image.src = review.image_url;
-                image.alt = `Order shared by ${review.customer_name}`;
-                image.loading = "lazy";
-                image.style.maxWidth = "100%";
-                image.style.height = "auto";
-                image.style.borderRadius = "10px";
-                card.appendChild(image);
-            }
+        whatsappButton.addEventListener("click", () => {
+            const message =
+                `Customer Review - RANG E HUNAR BY MISHAF\n\n` +
+                `${review.customer_name}\n` +
+                `${"★".repeat(review.rating)}\n` +
+                `${review.review_text}\n\n` +
+                window.location.href;
 
-            if (review.created_at) {
-                const date = document.createElement("small");
-                date.textContent = new Date(review.created_at)
-                    .toLocaleDateString();
-                card.appendChild(date);
-            }
-
-            // WhatsApp sharing
-            const whatsappButton = document.createElement("button");
-            whatsappButton.type = "button";
-            whatsappButton.textContent = "Share on WhatsApp";
-            whatsappButton.addEventListener("click", () => {
-                const message =
-                    `Customer Review - RANG E HUNAR BY MISHAF\n\n` +
-                    `${review.customer_name}\n` +
-                    `${"★".repeat(review.rating)}\n` +
-                    `${review.review_text}\n\n` +
-                    window.location.href;
-
-                window.open(
-                    "https://wa.me/?text=" + encodeURIComponent(message),
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-            });
-            card.appendChild(whatsappButton);
-
-            // Instagram sharing: copy review text
-            const instagramButton = document.createElement("button");
-            instagramButton.type = "button";
-            instagramButton.textContent = "Copy for Instagram";
-            instagramButton.addEventListener("click", async () => {
-                const message =
-                    `${review.customer_name} ⭐ ${review.rating}/5\n` +
-                    `${review.review_text}\n\n` +
-                    "RANG E HUNAR BY MISHAF 💖";
-
-                try {
-                    await navigator.clipboard.writeText(message);
-                    alert(
-                        "Review text copied! Ab Instagram open karke paste kar do. 💖"
-                    );
-                } catch {
-                    alert("Review text copy nahi hua. Please text manually copy karo.");
-                }
-            });
-            card.appendChild(instagramButton);
-
-            reviewsContainer.appendChild(card);
+            window.open(
+                "https://wa.me/?text=" + encodeURIComponent(message),
+                "_blank",
+                "noopener,noreferrer"
+            );
         });
-    }
+
+        const instagramButton = document.createElement("button");
+        instagramButton.type = "button";
+        instagramButton.className = "review-share-btn";
+        instagramButton.textContent = "Copy for Instagram";
+
+        instagramButton.addEventListener("click", async () => {
+            const message =
+                `${review.customer_name} ⭐ ${review.rating}/5\n` +
+                `${review.review_text}\n\n` +
+                "RANG E HUNAR BY MISHAF 💖";
+
+            try {
+                await navigator.clipboard.writeText(message);
+                alert("Review copied! Ab Instagram par paste kar dein. 💖");
+            } catch {
+                alert("Text copy nahi hua. Please manually copy karein.");
+            }
+        });
+
+        actions.append(whatsappButton, instagramButton);
+        card.appendChild(actions);
+
+        reviewsContainer.appendChild(card);
+    });
+}
 
     // Supabase se latest reviews load karna
     async function loadReviews() {
