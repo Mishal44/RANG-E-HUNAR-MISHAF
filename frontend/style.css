@@ -1832,3 +1832,187 @@ button {
     max-width: 750px;
     margin: 30px auto 0;
 }
+
+/* Customer Review Cards */
+#approvedReviews .review-card {
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 18px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Customer Order Photos */
+
+#approvedReviews .review-card img {
+    display: block;
+    width: 120px;
+    max-width: 100%;
+    height: 120px;
+    object-fit: cover;
+    margin: 12px auto;
+    border-radius: 10px;
+}
+
+
+/* ===== RANG E HUNAR - CUSTOMER REVIEWS ===== */
+
+#approvedReviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+    justify-content: center;
+    align-items: stretch;
+    gap: 22px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* One complete review in a single card */
+#approvedReviews .review-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 300px;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fffaf8;
+    border: 1px solid #f0d8df;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(100, 50, 60, 0.08);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#approvedReviews .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(100, 50, 60, 0.13);
+}
+
+/* Customer name */
+#approvedReviews .review-card h3 {
+    margin: 0 0 8px;
+    color: #713d50;
+    font-size: 18px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Star rating */
+#approvedReviews .review-card p[aria-label] {
+    margin: 0 0 12px;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+/* Review text */
+#approvedReviews .review-card > p:not([aria-label]) {
+    color: #5f5055;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+/* Order photo stays inside the same card */
+#approvedReviews .review-card img {
+    display: block;
+    width: 120px;
+    max-width: 100%;
+    height: 120px;
+    object-fit: cover;
+    align-self: center;
+    margin: 12px auto;
+    border: 1px solid #f0d8df;
+    border-radius: 12px;
+}
+
+/* Review date */
+#approvedReviews .review-card small {
+    display: block;
+    margin-top: 8px;
+    color: #9b818a;
+    font-size: 11px;
+}
+
+/* Share buttons */
+#approvedReviews .review-card button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid #d9a8b8;
+    border-radius: 25px;
+    background: #fff;
+    color: #713d50;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+#approvedReviews .review-card button:hover {
+    background: #713d50;
+    color: #fff;
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+    #approvedReviews {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 8px;
+    }
+
+    #approvedReviews .review-card {
+        max-width: 320px;
+    }
+}
+
+/* ===== Stylish Order Photo Upload ===== */
+
+#orderPhoto {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 10px 0 8px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px dashed #d9a8b8;
+    border-radius: 12px;
+    background: #fffaf8;
+    color: #713d50;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Choose File button */
+#orderPhoto::file-selector-button {
+    padding: 9px 16px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 22px;
+    background: #713d50;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#orderPhoto::file-selector-button:hover {
+    background: #a45f78;
+}
+
+/* File upload help text */
+#orderPhoto + p {
+    margin: 6px 0 15px;
+    color: #927984;
+    font-size: 12px;
+    line-height: 1.6;
+}
