@@ -622,6 +622,51 @@ onclick="addToCart('Luxury Love Basket', 5000)">
 
 </section>
 
+
+<!-- Customer Reviews Section -->
+<section class="customer-reviews" id="customer-reviews">
+    <h2>What Our Customers Say 💖</h2>
+    <p class="reviews-subtitle">
+        Your love and feedback mean everything to us!
+    </p>
+
+    <form id="reviewForm">
+        <label for="customerName">Your Name</label>
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Enter your name"
+            required
+        >
+
+        <label>Your Rating</label>
+        <div class="star-rating" id="starRating">
+            <button type="button" data-rating="1" aria-label="1 star">★</button>
+            <button type="button" data-rating="2" aria-label="2 stars">★</button>
+            <button type="button" data-rating="3" aria-label="3 stars">★</button>
+            <button type="button" data-rating="4" aria-label="4 stars">★</button>
+            <button type="button" data-rating="5" aria-label="5 stars">★</button>
+        </div>
+
+        <label for="customerReview">Your Review</label>
+        <textarea
+            id="customerReview"
+            placeholder="Share your experience with us..."
+            rows="4"
+            required
+        ></textarea>
+
+        <button type="submit" class="review-submit">
+            Submit Review 💌
+        </button>
+        <p id="reviewMessage" role="status"></p>
+    </form>
+
+    <div id="approvedReviews"></div>
+</section>
+<!-- End Customer Reviews Section -->
+
+
 <!-- CONTACT -->
 
 <section class="contact" id="contact">
