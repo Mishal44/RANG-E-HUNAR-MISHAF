@@ -2064,3 +2064,203 @@ button {
         font-size: 10px;
     }
 }
+
+/* WEDDING FAVORS HEADING */
+
+.favors-heading {
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.favors-heading h2 {
+    color: #4a202c;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.favors-heading > p {
+    color: #76545c;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* CUSTOMIZATION SECTION */
+
+.customization-info {
+    max-width: 750px;
+    margin: 30px auto 10px;
+    padding: 25px 30px;
+    background: #fff5f5;
+    border: 1px solid #ead4d8;
+    border-radius: 12px;
+}
+
+.customization-info h3 {
+    color: #4a202c;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.customization-info p {
+    color: #76545c;
+    line-height: 1.7;
+}
+
+.customization-info ul {
+    display: inline-block;
+    text-align: left;
+    color: #594047;
+    line-height: 2;
+    padding-left: 22px;
+}
+
+.custom-note {
+    font-weight: bold;
+    color: #9b596c !important;
+    margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+    .favors-heading h2 {
+        font-size: 25px;
+    }
+
+    .customization-info {
+        padding: 20px 15px;
+    }
+}
+
+/* =================================
+   WEDDING FAVORS PAGE STYLING
+================================= */
+
+/* CUSTOMIZATION SECTION */
+
+.customization-info {
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 28px 30px;
+    background: #fff5f5;
+    border: 1px solid #ead4d8;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(74, 32, 44, 0.06);
+}
+
+.customization-info h3 {
+    color: #4a202c;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.customization-info p {
+    color: #76545c;
+    line-height: 1.8;
+}
+
+.customization-info ul {
+    display: inline-block;
+    text-align: left;
+    color: #594047;
+    line-height: 2;
+    padding-left: 22px;
+}
+
+.customization-info li {
+    margin-bottom: 5px;
+}
+
+.customization-info .custom-note {
+    color: #9b596c;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* PRODUCT CARDS */
+
+.favors-grid .product-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(74, 32, 44, 0.10);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.favors-grid .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(74, 32, 44, 0.16);
+}
+
+.favors-grid .product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+/* PRODUCT TITLES */
+
+.favors-grid .product-card h3 {
+    color: #4a202c;
+    margin: 15px 0 10px;
+    font-family: Georgia, serif;
+}
+
+/* PRODUCT DESCRIPTION */
+
+.favors-grid .product-card p {
+    color: #76545c;
+    line-height: 1.6;
+    min-height: 45px;
+}
+
+/* PRICE */
+
+.favors-grid .price {
+    color: #8c4059;
+    font-weight: bold;
+    font-size: 19px;
+    margin: 12px 0;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .favors-banner img {
+        max-height: 220px;
+    }
+
+    .favors-heading {
+        padding: 20px 12px;
+    }
+
+    .customization-info {
+        padding: 20px 15px;
+    }
+
+    .customization-info h3 {
+        font-size: 20px;
+    }
+
+    .favors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .favors-grid .product-card {
+        padding: 9px;
+    }
+
+    .favors-grid .product-card img {
+        height: 160px;
+    }
+
+    .favors-grid .product-card h3 {
+        font-size: 15px;
+    }
+}

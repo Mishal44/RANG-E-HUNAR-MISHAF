@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wedding Favors | RANG E HUNAR BY MISHAF</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .favors-banner {
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .favors-banner img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .favors-heading {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .favors-heading h2 {
+            color: #4a202c;
+            font-family: Georgia, serif;
+        }
+
+        .favors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .favors-grid .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>RANG E HUNAR BY MISHAF</h1>
+
+   <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="cards.html">Cards</a>
+
+        <a href="bouquets.html">Bouquets</a>
+
+        <a href="frame.html">Frames</a>
+
+        <a href="basket.html">Baskets</a>
+
+        <a href="band.html">Bands</a>
+
+        <a href="suitcase.html">Suitcase</a>
+
+        <a href="favors.html">Favors</a>
+
+        <a href="index.html#featured">Products</a>
+
+        <a href="cart.html">
+            🛒 Cart (<span id="cartCount">0</span>)
+        </a>
+
+    </nav>
+
+    </header>
+
+
+    <!-- WEDDING FAVORS BANNER -->
+
+    <section class="favors-banner">
+
+        <img src="images/favors/wedding-banner.png"
+             alt="Wedding Favors Collection">
+
+    </section>
+
+
+    <!-- PAGE HEADING -->
+
+
+<!-- PAGE HEADING -->
+
+<section class="favors-heading">
+
+    <h2>Wedding Favors Collection 💍</h2>
+
+    <p>
+        Thoughtfully Crafted Favors to Make Every Celebration
+        Memorable. Handmade with Love ❤️
+    </p>
+
+    <div class="customization-info">
+
+        <h3>Personalization & Custom Orders</h3>
+
+        <p>
+            Make Your Special Day Even More Meaningful
+            with Beautifully Customized Wedding Favors.
+        </p>
+
+        <ul>
+            <li>Personalized Bride & Groom Names</li>
+
+            <li>Custom Event Themes – Mehndi, Mayun, Nikkah & Barat</li>
+
+            <li>Matching Wedding Colors and Designs</li>
+
+            <li>Customized Messages, Tags & Dates</li>
+
+            <li>Special Designs for Individual and Bulk Orders</li>
+        </ul>
+
+        <p class="custom-note">
+            Every Favor is Special, Just Like Your Celebration. ❤️
+        </p>
+
+    </div>
+
+</section>
+
+
+
+    <!-- WEDDING FAVOR PRODUCTS -->
+
+    <section class="favors-grid">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/1.JPG"
+                 alt="A Grand Welcome">
+
+            <h3>A Grand Welcome</h3>
+
+            <p>A beautiful welcome to celebrate a day filled with love and happiness. 
+                Size 24x28 inches.
+        </p>
+
+            <div class="price">
+                Rs. 3,500</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('A Grand Welcome ',3500)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('A Grand Welcome',3500)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/2.JPG"
+                 alt="Little Treat Cones">
+
+            <h3>Little Treat Cones</h3>
+
+            <p>Beautifully customized cones, filled with little treats and lots of love.
+                PER CONE PRICE🌸</p>
+
+            <div class="price">Rs. 150</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Little Treat Cones',150)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Little Treat Cones',150)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/3.JPG"
+                 alt="Colorful Traditions">
+
+            <h3>Colorful Traditions</h3>
+
+            <p>A beautiful touch of tradition, gifted with love and happiness. 
+                6 bangle per set. ❤️</p>
+
+            <div class="price">Rs. 130</div>
+
+
+
+            <button class="add-cart-button"
+                onclick="addToCart('Colorful Traditions',130)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Colorful Traditions',130)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/4.JPG"
+                 alt="A Little Desi Glam Of Jhumka">
+
+            <h3>A Little Desi Glam Of Jhumka</h3>
+
+            <p>A charming little gift to add sparkle to every celebration.
+                PER PAIR✨</p>
+
+            <div class="price">Rs. 550</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('A Little Desi Glam Of Jhumka',550)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('A Little Desi Glam Of Jhumka',550)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/5.JPG"
+                 alt="Shahi Goodness">
+
+            <h3>Shahi Goodness</h3>
+
+            <p>- A royal blend of sweetness and tradition, beautifully presented for your guests.
+                PER PEICE💕</p>
+
+            <div class="price">Rs. 100</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Shahi Goodness',100)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Shahi Goodness',100)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/6.JPG"
+                 alt="Floral Wrist Charm">
+
+            <h3>Floral Wrist Charm</h3>
+
+            <p>A beautiful floral touch to adorn your hands and make every celebration more special.
+                PER PEICE WITHOUT CARD🌹</p>
+
+            <div class="price">Rs. 350</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Floral Wrist Charm',350)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Floral Wrist Charm',350)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 7 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/7.JPG"
+                 alt="What Jhumka? Mini Board">
+
+            <h3>What Jhumka? Mini Board</h3>
+
+            <p>A little desi glam with a playful touch for your wedding celebrations.
+                A4 SIZE💖</p>
+
+            <div class="price">Rs. 700</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('What Jhumka? Mini Board',700)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('What Jhumka? Mini Board',700)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 8 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/8.JPG"
+                 alt="Bole Chooriyan Mini Board">
+
+            <h3>Bole Chooriyan Mini Board</h3>
+
+            <p>A little board celebrating the beauty of bangles, colors and timeless wedding traditions. 
+                A4 SIZE💌</p>
+
+            <div class="price">Rs. 700</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Bole Chooriyan Mini Board',700)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Bole Chooriyan Mini Board',700)">
+                Order Now
+            </button>
+
+        </div>
+
+<!-- PRODUCT 21-->
+
+        <div class="product-card">
+
+            <img src="images/favors/8.1.JPG"
+                 alt="Jhumka board">
+
+            <h3>Jhumka board</h3>
+
+            <p>A Golden Touch for Beautiful Memories 
+                A4 SIZE✨</p>
+
+            <div class="price">Rs. 700</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Jhumka board',700)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Jhumka board',700)">
+                Order Now
+            </button>
+
+        </div>
+
+        <!-- PRODUCT 9 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/9.JPG"
+                 alt="Colorful Timeless Elegance">
+
+            <h3>Colorful Timeless Elegance</h3>
+
+            <p>A Splash of Colors for Every Celebration
+                6 BANGLES PER SET 🌈</p>
+
+            <div class="price">Rs. 500</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Colorful Timeless Elegance',500)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Colorful Timeless Elegance',500)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 10 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/10.JPG"
+                 alt="Dholki Delight">
+
+            <h3>Dholki Delight</h3>
+
+            <p>A festive little dholki favor, customized with delightful treats and love
+                PER PEICE WITH FILLING OF CANDYS INSIDE.💛</p>
+
+            <div class="price">Rs. 600</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Dholki Delight',600)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Dholki Delight',600)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 11 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/11.JPG"
+                 alt="Floral Charm Gift">
+
+            <h3>Floral Charm Gift</h3>
+
+            <p>A delicate floral surprise, beautifully paired with a personalized card.
+                PER PEICE.🌼</p>
+
+            <div class="price">Rs. 500</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Floral Charm Gift',500)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Floral Charm Gift',500)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 12 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/12.JPG"
+                 alt="Personalized Pair Perfection">
+
+            <h3>Personalized Pair Perfection</h3>
+
+            <p>Twelve customized little details, thoughtfully created to make your celebration extra special.
+                PER DOZEN💝</p>
+
+            <div class="price">Rs. 250</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Personalized Pair Perfection',250)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Personalized Pair Perfection',250)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 13 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/13.JPG"
+                 alt="Namkeen Treat Cones">
+
+            <h3>Namkeen Treat Cones</h3>
+
+            <p>A crunchy little surprise to add flavor and fun to every celebration.
+                 PER PEICE🍬</p>
+
+            <div class="price">Rs. 150</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Namkeen Treat Cones',150)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Namkeen Treat Cones',150)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 14 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/14.JPG"
+                 alt="A Heart Full of Chocolate">
+
+            <h3>A Heart Full of Chocolate</h3>
+
+            <p>A sweet little expression of love, made even more special with a personalized card.
+                 PER PEICE✨</p>
+
+            <div class="price">Rs. 120</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('A Heart Full of Chocolate',120)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('A Heart Full of Chocolate',120)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 15 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/15.JPG"
+                 alt="Team Bride Glass Collection">
+
+            <h3>Team Bride Glass Collection</h3>
+
+            <p>Customized glasses made to celebrate the bride squad in style.💗</p>
+
+            <div class="price">Rs. 800</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Team Bride Glass Collection',800)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Team Bride Glass Collection',800)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 16 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/16.JPG"
+                 alt="Sweet Little Keepsakes">
+
+            <h3>Sweet Little Keepsakes</h3>
+
+            <p>A thoughtful combination of little treats and personalized greetings for your guests.
+                 PER PEICE❤️</p>
+
+            <div class="price">Rs. 300</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Sweet Little Keepsakes',300)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Sweet Little Keepsakes',300)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 17 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/17.JPG"
+                 alt="Royal Refresh Cones">
+
+            <h3>Royal Refresh Cones</h3>
+
+            <p>Adding Sweetness to Your Celebrations 
+                 PER PEICE🍭</p>
+
+            <div class="price">Rs. 180</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Royal Refresh Cones',180)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Royal Refresh Cones',180)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 18 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/18.JPG"
+                 alt="Sweet Pearl Surprise">
+
+            <h3>Sweet Pearl Surprise</h3>
+
+            <p>A charming pearl-inspired favor paired with a delightful crunchy surprise.
+                 PER PEICE🌷</p>
+
+            <div class="price">Rs. 550</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Sweet Pearl Surprise',550)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Sweet Pearl Surprise',550)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 19 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/19.JPG"
+                 alt="Bride Squad Ribbons">
+
+            <h3>Bride Squad Ribbons</h3>
+
+            <p>Wear the celebration with personalized ribbons made for the bride's special team.
+                 PER PEICE🎀</p>
+
+            <div class="price">Rs. 160</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Bride Squad Ribbons',160)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Bride Squad Ribbons',160)">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 20 -->
+
+        <div class="product-card">
+
+            <img src="images/favors/20.JPG"
+                 alt="Golden Wedding Favors">
+
+            <h3>Golden Wedding Favors</h3>
+
+            <p>Beautiful single-color bangles paired with a sweet candy surprise, wrapped with love. 
+                 PER PEICE(4 BANGLES AND CANDY)✨</p>
+
+            <div class="price">Rs. 450</div>
+
+            <button class="add-cart-button"
+                onclick="addToCart('Golden Wedding Favors',450)">
+                Add to Cart 🛒
+            </button>
+
+            <button class="order-button"
+                onclick="orderNow('Golden Wedding Favors',450)">
+                Order Now
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 RANG E HUNAR BY MISHAF
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

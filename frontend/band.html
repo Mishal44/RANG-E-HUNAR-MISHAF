@@ -13,6 +13,44 @@
     <link rel="stylesheet"
           href="style.css">
 
+    <style>
+        .bands-banner {
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .bands-banner img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .bands-heading {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .bands-heading h2 {
+            color: #4a202c;
+            font-family: Georgia, serif;
+        }
+
+        .bands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .bands-grid .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -21,7 +59,7 @@
 
     <h1>RANG E HUNAR BY MISHAF</h1>
 
-    <nav>
+   <nav>
 
         <a href="index.html">Home</a>
 
@@ -37,6 +75,8 @@
 
         <a href="suitcase.html">Suitcase</a>
 
+        <a href="favors.html">Favors</a>
+
         <a href="index.html#featured">Products</a>
 
         <a href="cart.html">
@@ -46,6 +86,18 @@
     </nav>
 
 </header>
+
+    <!--  BANNER -->
+
+    <section class="bands-banner">
+
+        <img src="images/bands/band-banner.png"
+             alt="Bands Collection">
+
+    </section>
+
+
+    <!-- PAGE HEADING -->
 
 
 <section class="cards-page">
@@ -147,6 +199,7 @@ Perfect for adding a unique and meaningful touch to gifts, celebrations, and spe
 
             <p>
                 Made for the woman whose love is truly priceless.
+                Per peice.
             </p>
 
             <div class="price">
@@ -257,6 +310,7 @@ Perfect for adding a unique and meaningful touch to gifts, celebrations, and spe
 
             <p>
                 Wear the letter that means something special to you.
+                Per peice.
             </p>
 
             <div class="price">
