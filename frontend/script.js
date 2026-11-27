@@ -408,8 +408,8 @@ document.addEventListener(
 
 /* Customer Reviews System - Supabase */
 
-const SUPABASE_URL = "https://fttcocmwmsikjjdxdkyo.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_gBBsbfqudQn6K1EbTAxOSg_SqZzEpwn";
+const SUPABASE_URL = "https://fytwaadcqvfzsauqsmvb.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KIs2KOhWphoPaNHKmuXPhQ_mRREdxGR";
 
 const REVIEWS_TABLE_URL = `${SUPABASE_URL}/rest/v1/reviews`;
 const STORAGE_BUCKET = "order-review-photos";
@@ -426,13 +426,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedRating = 0;
 
     // Supabase request headers
-    function supabaseHeaders(extraHeaders = {}) {
-        return {
-            apikey: SUPABASE_PUBLISHABLE_KEY,
-            ...extraHeaders
-        };
-    }
-
+function supabaseHeaders(extraHeaders = {}) {
+    return {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        ...extraHeaders
+    };
+}
     // Customer rating select karna
     function updateStars() {
         starButtons.forEach((button) => {
